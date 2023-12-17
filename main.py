@@ -26,7 +26,7 @@ def run_script(script_path):
 #Componente raíz
 raiz = tkinter.Tk()
 raiz.title("Danger theory applied to economics")
-raiz.geometry('500x200')
+raiz.geometry('500x400')
 raiz.resizable(False,False)
 
 threads = []  # List to store the threads
@@ -36,7 +36,11 @@ boton1 = tkinter.Button(raiz, text="Real Exchange Rate", width=50, height=2, com
 boton1.grid(row=2, column=3, columnspan=1, padx=35, pady=10)
 boton2 = tkinter.Button(raiz, text="International GPB Reserves", width=50, height=2, command=lambda: run_script('Reserves.py'))
 boton2.grid(row=3, column=3, columnspan=1, padx=35, pady=10)
-boton4= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
+boton4= tkinter.Button(raiz, text="Fluctuation Band 2.25%", width=50, height=2, command=lambda: run_script('FluctuationBand.py'))
 boton4.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
+boton4= tkinter.Button(raiz, text="Fluctuation Band 15%", width=50, height=2, command=lambda: run_script('FluctuationBand_15.py'))
+boton4.grid(row=5, column=3, columnspan=1, padx=35, pady=10)
+boton4= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
+boton4.grid(row=6, column=3, columnspan=1, padx=35, pady=10)
 
 raiz.mainloop()
