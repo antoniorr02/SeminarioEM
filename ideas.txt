@@ -1,0 +1,8 @@
+- Mantener banda de fluctuación 2.25%
+- Mantener banda de fluctuación 15%
+- Suspender cotización de libras / marcos
+
+2. Simular quiebra total. Reservas = 0.
+	- Si no se hubiera pusto el tipo de cambio flotante, caunto habría tardado.
+
+Meter posibilidad de ir metiendo ataques de diferentes envergadura y que se vea el resultado y ver si salta el sistema de defensa, para detectar cuando es un ataque demasiado grande y cuando es pequeño.
