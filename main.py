@@ -6,7 +6,7 @@ def stop():
     # Wait for all threads to finish
     for thread in threads:
         thread.join()
-    raiz.destroy()
+    raiz.destroy()    
     
 def execute_script(script_path):
     try:
@@ -23,10 +23,30 @@ def run_script(script_path):
     thread.start()
     threads.append(thread)
 
+def small_atack():
+    #Componente raíz
+    submenu = tkinter.Toplevel(raiz)
+    submenu.title("Small Atacks")
+    submenu.geometry('500x350')
+    submenu.resizable(False,False)
+
+    #Botones submenu
+    botonA= tkinter.Button(submenu, text="Attacks 0.05", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonA.grid(row=1, column=3, columnspan=1, padx=35, pady=10)
+    botonB= tkinter.Button(submenu, text="Attacks 0.1", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonB.grid(row=2, column=3, columnspan=1, padx=35, pady=10)
+    botonC= tkinter.Button(submenu, text="Attacks 0.15", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonC.grid(row=3, column=3, columnspan=1, padx=35, pady=10)
+    botonD= tkinter.Button(submenu, text="Attacks 0.2", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonD.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
+    botonClose= tkinter.Button(submenu, text="Close", width=50, height=2, command=lambda: submenu.destroy())
+    botonClose.grid(row=5, column=3, columnspan=1, padx=35, pady=10)
+
+
 #Componente raíz
 raiz = tkinter.Tk()
 raiz.title("Danger theory applied to economics")
-raiz.geometry('500x400')
+raiz.geometry('500x420')
 raiz.resizable(False,False)
 
 threads = []  # List to store the threads
@@ -36,11 +56,13 @@ boton1 = tkinter.Button(raiz, text="Real Exchange Rate", width=50, height=2, com
 boton1.grid(row=2, column=3, columnspan=1, padx=35, pady=10)
 boton2 = tkinter.Button(raiz, text="International GPB Reserves", width=50, height=2, command=lambda: run_script('Reserves.py'))
 boton2.grid(row=3, column=3, columnspan=1, padx=35, pady=10)
-boton4= tkinter.Button(raiz, text="Fluctuation Band 2.25%", width=50, height=2, command=lambda: run_script('FluctuationBand.py'))
-boton4.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
+boton3= tkinter.Button(raiz, text="Fluctuation Band 2.25%", width=50, height=2, command=lambda: run_script('FluctuationBand.py'))
+boton3.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
 boton4= tkinter.Button(raiz, text="Fluctuation Band 15%", width=50, height=2, command=lambda: run_script('FluctuationBand_15.py'))
 boton4.grid(row=5, column=3, columnspan=1, padx=35, pady=10)
-boton4= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
-boton4.grid(row=6, column=3, columnspan=1, padx=35, pady=10)
+boton5= tkinter.Button(raiz, text="Small Attacks", width=50, height=2, command=small_atack)
+boton5.grid(row=6, column=3, columnspan=1, padx=35, pady=10)
+boton6= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
+boton6.grid(row=7, column=3, columnspan=1, padx=35, pady=10)
 
 raiz.mainloop()
