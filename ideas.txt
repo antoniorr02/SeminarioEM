@@ -1,13 +1,13 @@
 - Mantener banda de fluctuación 2.25%
 - Mantener banda de fluctuación 15%
-- Suspender cotización de libras / marcos
+
+- Ampliar banda de fluctuación
 
 2. Simular quiebra total. Reservas = 0.
-	- Si no se hubiera pusto el tipo de cambio flotante, caunto habría tardado.
+	- Si no se hubiera pusto el tipo de cambio flotante, cuanto habría tardado.
 
 Meter posibilidad de ir metiendo ataques de diferentes envergadura y que se vea el resultado y ver si salta el sistema de defensa, para detectar cuando es un ataque demasiado grande y cuando es pequeño.
 
 DUDAS:
 1. Función lineal del correo.
-2. Cómo podría representar el cierre del mercado.
 3. Ver si la idea que he tenido para ataques pequeños es buena.
