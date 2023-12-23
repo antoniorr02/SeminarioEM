@@ -1,5 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
+
+# Check if the script was called with the correct number of arguments
+if len(sys.argv) != 2:
+    print("Usage: python script.py arg1")
+    sys.exit(1)
+
+# Retrieve command-line arguments
+attack_size = sys.argv[1]
 
 # Load the Excel file with exchange rate data
 excel_file_path = 'data/ExchangeRateData.xlsx'

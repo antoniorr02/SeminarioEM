@@ -10,7 +10,7 @@ def stop():
     
 def execute_script(script_path):
     try:
-        result = subprocess.run(['python3', script_path], check=True) # Unix-like systems
+        result = subprocess.run(['python3', script_path ], check=True) # Unix-like systems
         # OR
         # subprocess.run(['python.exe', script_path], check=True)  # Windows
     except subprocess.CalledProcessError as e:
@@ -31,13 +31,13 @@ def small_atack():
     submenu.resizable(False,False)
 
     #Buttons submenu
-    botonA= tkinter.Button(submenu, text="Attacks 0.05", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonA= tkinter.Button(submenu, text="Attacks 0.05", width=50, height=2, command=lambda: subprocess.run(['python3', 'SmallAtacks.py', '0.05']))
     botonA.grid(row=1, column=3, columnspan=1, padx=35, pady=10)
-    botonB= tkinter.Button(submenu, text="Attacks 0.1", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonB= tkinter.Button(submenu, text="Attacks 0.1", width=50, height=2, command=lambda: subprocess.run(['python3', 'SmallAtacks.py', '0.1']))
     botonB.grid(row=2, column=3, columnspan=1, padx=35, pady=10)
-    botonC= tkinter.Button(submenu, text="Attacks 0.15", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonC= tkinter.Button(submenu, text="Attacks 0.15", width=50, height=2, command=lambda: subprocess.run(['python3', 'SmallAtacks.py', '0.15']))
     botonC.grid(row=3, column=3, columnspan=1, padx=35, pady=10)
-    botonD= tkinter.Button(submenu, text="Attacks 0.2", width=50, height=2, command=lambda: run_script('SmallAtacks.py'))
+    botonD= tkinter.Button(submenu, text="Attacks 0.2", width=50, height=2, command=lambda: subprocess.run(['python3', 'SmallAtacks.py', '0.2']))
     botonD.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
     botonClose= tkinter.Button(submenu, text="Close", width=50, height=2, command=lambda: submenu.destroy())
     botonClose.grid(row=5, column=3, columnspan=1, padx=35, pady=10)
