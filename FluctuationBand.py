@@ -62,11 +62,56 @@ plt.axvline(x=filtered_df_exchange_rate_min_date[date_col], color='purple', line
 plt.legend()
 plt.show()
 
-# Obtain diferences between real values and values with 2.25 fluctuation band
-# exchange_rate_diferences = exchange_rate_value - df_exchange_rate.loc[invalid_condition, exchange_rate_col]
-# print(f'The maximun diference exchange rate is: {exchange_rate_diferences.max()}')
-# # Check levels of international reserves supporting the diferences
-# # Calculate the differences intraday
-# differences = exchange_rate_diferences.diff()
-#for diference in differences:
-    # Sum international reserves (we have positive and negative diferences)
+##################################################
+
+# Obtain exchange rate diferents monthly between fluctuation band and real values
+exchange_rate_diferences = df_exchange_rate.loc[invalid_condition]
+exchange_rate_diferences[exchange_rate_col] = exchange_rate_value - df_exchange_rate.loc[invalid_condition, exchange_rate_col]
+exchange_rate_diferences['Date'] = pd.to_datetime(exchange_rate_diferences['Date'], format='%d/%m/%Y')
+df_exchange_rate_differents_monthly = exchange_rate_diferences.resample('M', on='Date').mean().reset_index()
+print(df_exchange_rate_differents_monthly)
+
+# Load the Excel file with reserves
+excel_file_path = 'data/ReservesData.xlsx'
+df_reserves = pd.read_excel(excel_file_path)
+
+date_col = 'Date'
+reserves_col = 'Total Reserves'
+
+# Filter the DataFrame based on the date
+date_to_filter_reserves = '1992-08-31'
+filtered_df_reserves_before = df_reserves[df_reserves['Date'] <= date_to_filter_reserves]
+filtered_df_reserves_after = df_reserves[df_reserves['Date'] > date_to_filter_reserves]
+
+# Simulate exchage rate with flucuation band
+excel_file_path = 'output/linear_regression_coefficients.xlsx'
+df_coefficients = pd.read_excel(excel_file_path)
+intercept = df_coefficients.loc[0,'Coefficient']
+coefficient = df_coefficients.loc[1,'Coefficient']
+simulated_reserves = filtered_df_reserves_after
+
+merged_df_simulated_reserves = pd.merge(df_exchange_rate_differents_monthly, simulated_reserves, on='Date', how='inner')
+merged_df_simulated_reserves[reserves_col] = merged_df_simulated_reserves[reserves_col] - (intercept + coefficient * merged_df_simulated_reserves[exchange_rate_col])
+print(merged_df_simulated_reserves)
+print(simulated_reserves)
+
+# Plot the reserves data
+plt.figure(figsize=(13,9))
+plt.plot(filtered_df_reserves_before[date_col], filtered_df_reserves_before[reserves_col], label='Reserves Before Quit Flutuation Band', marker='o', zorder=1)
+plt.scatter(filtered_df_reserves_after[date_col], filtered_df_reserves_after[reserves_col], color='red', label='Reserves without Fluctuation Band', marker='x', s=50, zorder=1)
+plt.scatter(merged_df_simulated_reserves[date_col], merged_df_simulated_reserves[reserves_col], color='green', label='Reserves with Fluctuation Band', marker='s', s=50, zorder=1)
+plt.title('International GPB Reserves')
+plt.xlabel('Date')
+plt.ylabel('Total Reserves')
+plt.legend()
+plt.grid(True)
+
+# Convert the date string to a datetime object (Fluctuation band from 2.25 to 15%)
+date_of_change = pd.to_datetime('1992-08-31')
+
+# Add a vertical line at the date of September 16, 1992
+plt.axvline(x=date_of_change, color='green', linestyle='--', label='September, 1992')
+
+#Show the chart
+plt.legend()
+plt.show()
