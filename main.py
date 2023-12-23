@@ -46,7 +46,7 @@ def small_atack():
 #Root Component
 raiz = tkinter.Tk()
 raiz.title("Danger theory applied to economics")
-raiz.geometry('500x480')
+raiz.geometry('500x550')
 raiz.resizable(False,False)
 
 threads = []  # List to store the threads
@@ -58,13 +58,15 @@ boton2 = tkinter.Button(raiz, text="International GPB Reserves", width=50, heigh
 boton2.grid(row=3, column=3, columnspan=1, padx=35, pady=10)
 boton3 = tkinter.Button(raiz, text="Lineal Regresion", width=50, height=2, command=lambda: run_script('LinearRegresionReservesExchangeRate.py'))
 boton3.grid(row=4, column=3, columnspan=1, padx=35, pady=10)
-boton4= tkinter.Button(raiz, text="Fluctuation Band 2.25%", width=50, height=2, command=lambda: run_script('FluctuationBand.py'))
+boton4 = tkinter.Button(raiz, text="Reserves Prediction", width=50, height=2, command=lambda: run_script('ReservesPredicted.py'))
 boton4.grid(row=5, column=3, columnspan=1, padx=35, pady=10)
-boton5= tkinter.Button(raiz, text="Fluctuation Band 15%", width=50, height=2, command=lambda: run_script('FluctuationBand_15.py'))
+boton5= tkinter.Button(raiz, text="Fluctuation Band 2.25%", width=50, height=2, command=lambda: run_script('FluctuationBand.py'))
 boton5.grid(row=6, column=3, columnspan=1, padx=35, pady=10)
-boton6= tkinter.Button(raiz, text="Small Attacks", width=50, height=2, command=small_atack)
+boton6= tkinter.Button(raiz, text="Fluctuation Band 15%", width=50, height=2, command=lambda: run_script('FluctuationBand_15.py'))
 boton6.grid(row=7, column=3, columnspan=1, padx=35, pady=10)
-boton6= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
-boton6.grid(row=8, column=3, columnspan=1, padx=35, pady=10)
+boton7= tkinter.Button(raiz, text="Small Attacks", width=50, height=2, command=small_atack)
+boton7.grid(row=8, column=3, columnspan=1, padx=35, pady=10)
+boton8= tkinter.Button(raiz, text="Close", width=50, height=2, command=stop)
+boton8.grid(row=9, column=3, columnspan=1, padx=35, pady=10)
 
 raiz.mainloop()
