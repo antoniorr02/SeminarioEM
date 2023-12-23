@@ -31,14 +31,14 @@ df_exchange_rate_monthly = df_exchange_rate.resample('M', on='Date').mean().rese
 # Merge the two DataFrames on the 'Date' column
 merged_df_exchange_rate = pd.merge(df_exchange_rate_monthly, df_reserves, on='Date', how='inner')
 
-# Calculate the daily change in exchange rate
-merged_df_exchange_rate['Exchange Rate Change'] = merged_df_exchange_rate['Exchange Rate'].diff()
+# # Calculate the daily change in exchange rate
+# merged_df_exchange_rate['Exchange Rate Change'] = merged_df_exchange_rate['Exchange Rate'].diff()
 
 # Drop the NaN value resulting from the diff() operation
 merged_df_exchange_rate = merged_df_exchange_rate.dropna()
 
 # Select features and target variable
-X = merged_df_exchange_rate[['Exchange Rate Change']]
+X = merged_df_exchange_rate[['Exchange Rate']]
 y = merged_df_exchange_rate['Total Reserves']
 
 # Split the data into training and testing sets
@@ -60,8 +60,8 @@ print(f'Mean Squared Error: {mse}')
 # Plot the original data and the linear regression line
 plt.scatter(X_test, y_test, color='blue', label='Actual Reserves')
 plt.plot(X_test, y_pred, color='red', linewidth=2, label='Linear Regression Prediction')
-plt.xlabel('Exchange Rate Change')
+plt.xlabel('Exchange Rate')
 plt.ylabel('International Reserves')
 plt.legend()
-plt.title('Linear Regression: Exchange Rate Change vs International Reserves')
+plt.title('Linear Regression: Exchange Rate vs International Reserves')
 plt.show()
