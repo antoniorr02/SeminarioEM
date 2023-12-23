@@ -65,3 +65,32 @@ plt.ylabel('International Reserves')
 plt.legend()
 plt.title('Linear Regression: Exchange Rate vs International Reserves')
 plt.show()
+
+############################
+# Make predictions on the entire dataset
+merged_df_exchange_rate['Reserves Prediction'] = model.predict(X)
+
+# Create a DataFrame to store the results
+results_df = merged_df_exchange_rate[['Date', 'Exchange Rate', 'Total Reserves', 'Reserves Prediction']]
+
+# Save the results to an Excel file
+excel_file_path_results = 'output/linear_regression_results.xlsx'
+results_df.to_excel(excel_file_path_results, index=False)
+
+############################
+# Create a DataFrame to store the model coefficients and intercept
+coefficients_df = pd.DataFrame({'Feature': X_train.columns, 'Coefficient': model.coef_})
+
+# Add a row for the intercept
+intercept_row = pd.DataFrame({'Feature': 'Intercept', 'Coefficient': model.intercept_}, index=[0])
+coefficients_df = pd.concat([intercept_row, coefficients_df]).reset_index(drop=True)
+
+# Save the coefficients to an Excel file
+excel_file_path = 'output/linear_regression_coefficients.xlsx'
+coefficients_df.to_excel(excel_file_path, index=False)
+
+# TOTAL RESERVES = B0 + B1 * EXCHANGE RATE
+# TOTAL RESERVES --> y_train
+# EXCHANGE RATE --> x_train
+# B0 --> model_intercept
+# B1 --> model_coeficient
