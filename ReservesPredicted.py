@@ -12,7 +12,7 @@ df_reserves = pd.read_excel(excel_file_path)
 date_col = 'Date'
 reserves_col = 'Total Reserves'
 
-# Predicted Reserves
+# Predicted Reserves (calculated in script LinearRegresionReservesExchangeRate.py)
 excel_file_path = 'output/linear_regression_results.xlsx'
 df_predicted_reserves = pd.read_excel(excel_file_path)
 predicted_reserves = 'Reserves Prediction'
@@ -30,3 +30,7 @@ plt.grid(True)
 #Show the chart
 plt.legend()
 plt.show()
+
+# Save the results to an Excel file
+excel_file_path_results = 'output/reserves_predicted.xlsx'
+df_predicted_reserves.to_excel(excel_file_path_results, index=False)

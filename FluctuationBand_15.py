@@ -81,7 +81,7 @@ df_reserves = pd.read_excel(excel_file_path)
 date_col = 'Date'
 reserves_col = 'Total Reserves'
 
-# Filter the DataFrame based on the date
+# Filter the DataFrame based on the date (Before and after change fluctuation band)
 date_to_filter_reserves = '1992-08-31'
 filtered_df_reserves_before = df_reserves[df_reserves['Date'] <= date_to_filter_reserves]
 filtered_df_reserves_after = df_reserves[df_reserves['Date'] > date_to_filter_reserves]
@@ -91,9 +91,12 @@ excel_file_path = 'output/linear_regression_coefficients.xlsx'
 df_coefficients = pd.read_excel(excel_file_path)
 intercept = df_coefficients.loc[0,'Coefficient']
 coefficient = df_coefficients.loc[1,'Coefficient']
-simulated_reserves = filtered_df_reserves_after
 
+# Simulate exchage rate with flucuation band
+simulated_reserves = filtered_df_reserves_after
+# Join two dataframes relatives to exchange_rate monthly and reserves after change fluctuation band
 merged_df_simulated_reserves = pd.merge(df_exchange_rate_differents_monthly, simulated_reserves, on='Date', how='inner')
+# Simulated our new reserves with out linear regresion function.
 merged_df_simulated_reserves[reserves_col] = merged_df_simulated_reserves[reserves_col] - (intercept + coefficient * merged_df_simulated_reserves[exchange_rate_col])
 print(merged_df_simulated_reserves)
 print(simulated_reserves)
@@ -118,3 +121,7 @@ plt.axvline(x=date_of_change, color='green', linestyle='--', label='September, 1
 #Show the chart
 plt.legend()
 plt.show()
+
+# Save the results to an Excel file
+excel_file_path_results = 'output/reserves_fluctuationBand15.xlsx'
+merged_df_simulated_reserves.to_excel(excel_file_path_results, index=False)

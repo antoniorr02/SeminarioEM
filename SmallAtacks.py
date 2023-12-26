@@ -65,3 +65,7 @@ plt.ylabel('Total Reserves')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+# Save the results to an Excel file
+excel_file_path_results = 'output/attack_results.xlsx'
+merged_df_simulated_reserves.to_excel(excel_file_path_results, index=False)
